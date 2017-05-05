@@ -6,7 +6,7 @@ Quick Start
 
 This image uses Shadowsocksr mudb.json to run the multi-user containers.
 
-    docker run -d -p 443:443/tcp -p 443:443/udp letssudormrf/ssr-mudb-docker --name ssr-mudb-docker
+    docker run -d -p 443:443/tcp -p 443:443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
 
 important:The multi-user's port must greater than 65535
 
