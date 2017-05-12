@@ -24,4 +24,4 @@ then
                 done
 fi
 
-python /shadowsocksr/server.py m
+python /shadowsocksr/server.py m>> ssserver.log 2>&1

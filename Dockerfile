@@ -24,4 +24,4 @@ COPY start.sh /root/
 RUN chmod a+x /root/start.sh
 WORKDIR /shadowsocksr
 ENTRYPOINT ["/root/start.sh"]
-CMD python /shadowsocksr/server.py m
+CMD python /shadowsocksr/server.py m>> ssserver.log 2>&1
