@@ -4,11 +4,15 @@ SSR-MUDB-DOCKER
 Quick Start
 -----------
 
-This image uses Shadowsocksr mudb.json to run the multi-user containers.
+This image uses Shadowsocksr multi-user feature to run the multi-user on one port containers
 
     docker run -d -p 443:443/tcp -p 443:443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
 
-important:The multi-user's port must greater than 65535
+Also it can specify the vaule of "-p PORT -k PASSWORD -m METHOD -O PROTOCOL -o OBFS" to run the container
+
+    docker run -d -p 465:465/tcp -p 465:465/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker -p 465 -k password -m aes-128-ctr -O auth_aes128_sha1 -o http_post
+
+**important:** For using the feature of multi-user on one port, please set up the multi-user's port greater than 65535
 
 To add multi-user imformation
 
@@ -26,6 +30,45 @@ To list multi-user imformation
 
     docker exec -it ssr-mudb-docker python mujson_mgr.py -l -u USER1_ID
 
+To limit device connection number(2 devices)
+
+    docker exec -it ssr-mudb-docker python mujson_mgr.py -e -u USER1_ID -G 2
+
+To limit transfer bandwidth(1 GB)
+
+    docker exec -it ssr-mudb-docker python mujson_mgr.py -e -u USER1_ID -t 1
+
+Advanced Usage 
+-----------
+
+To backup the mudb.json configuration file to local mudb.json.bak
+
+    docker exec -i ssr-mudb-docker cat mudb.json > ./mudb.json.bak
+
+To recovery the mudb.json configuration file from local mudb.json.bak
+
+    docker exec -i ssr-mudb-docker /bin/sh -c "cat > mudb.json" < ./mudb.json.bak 
+
+To redirect the authentication failed connecting to others ip or website (IP:1.2.3.4 port:80)
+
+    docker exec -it ssr-mudb-docker sed -i "s/^.*\"redirect\":.*$/    \"redirect\": \"1.2.3.4:80\",/" user-config.json
+    docker restart ssr-mudb-docker
+
+IPv6 Connection
+-----------
+**Support for IPv6:** (untested)
+Using NDP proxying
+<https://docs.docker.com/engine/userguide/networking/default_network/ipv6/#using-ndp-proxying>
+
+Simple command sample(2001:db8::c009 is docker container global ipv6 address):
+   
+    sysctl -w net.ipv6.conf.eth0.proxy_ndp=1
+    ip -6 neigh add proxy 2001:db8::c009 dev eth0
+
+Also use the following command for changing to IPv6 DNS, then restart the container.
+
+    docker exec -it ssr-mudb-docker sed -i 's/"dns_ipv6": false/"dns_ipv6": true/' user-config.json
+    docker restart ssr-mudb-docker
 
 More Options
 -----------
