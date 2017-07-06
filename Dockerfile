@@ -10,8 +10,8 @@ RUN set -ex \
 #Make ssr-mudb
 ENV PORT="443"
 ENV PASSWORD="ssr-mudb-docker"
-ENV METHOD="chacha20"
-ENV PROTOCOL="auth_aes128_md5"
+ENV METHOD="none"
+ENV PROTOCOL="auth_chain_a"
 ENV OBFS="tls1.2_ticket_auth"
 
 RUN git clone https://github.com/shadowsocksr/shadowsocksr.git \
