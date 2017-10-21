@@ -14,7 +14,7 @@ ENV METHOD="none"
 ENV PROTOCOL="auth_chain_a"
 ENV OBFS="tls1.2_ticket_auth"
 
-RUN git clone https://github.com/shadowsocksr/shadowsocksr.git \
+RUN git clone -b akkariiin/master https://github.com/letssudormrf/shadowsocksr \
     && cd shadowsocksr \
     && chmod +x *.sh && chmod +x shadowsocks/*.sh && cp apiconfig.py userapiconfig.py && cp config.json user-config.json && sed -i 's/sspanelv2/mudbjson/' userapiconfig.py \
     && python mujson_mgr.py -a -u MUDB -p ${PORT} -k ${PASSWORD} -m ${METHOD} -O ${PROTOCOL} -o ${OBFS} -G "#"
