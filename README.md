@@ -6,15 +6,11 @@ Quick Start
 
 This image uses Shadowsocksr multi-user feature to run the multi-user on one port containers
 
-    docker run -d -p 443:443/tcp -p 443:443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
-
-Also it can specify the vaule of "-p PORT -k PASSWORD -m METHOD -O PROTOCOL -o OBFS" to run the container
-
-    docker run -d -p 465:465/tcp -p 465:465/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker -p 465 -k password -m aes-128-ctr -O auth_aes128_sha1 -o http_post
+    docker run -d -p 443:8443/tcp -p 443:8443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
 
 Keep the Docker container running automatically after starting, add **--restart always**.
 
-    docker run --restart always --privileged -d -p 443:443/tcp -p 443:443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
+    docker run --restart always --privileged -d -p 443:8443/tcp -p 443:8443/udp --name ssr-mudb-docker letssudormrf/ssr-mudb-docker
 
 **important:** For using the feature of multi-user on one port, please set up the multi-user's port greater than 65535
 
