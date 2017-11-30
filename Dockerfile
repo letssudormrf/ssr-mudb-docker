@@ -9,12 +9,10 @@ RUN set -ex \
 
 RUN git clone -b akkariiin/master https://github.com/letssudormrf/shadowsocksr \
     && cd shadowsocksr \
-    && chmod +x *.sh \
-    && chmod +x shadowsocks/*.sh \
     && cp apiconfig.py userapiconfig.py \
     && cp config.json user-config.json \
     && sed -i 's/sspanelv2/mudbjson/' userapiconfig.py \
-    && rm mudb.json \
+    && echo -n "" > mudb.json \
     && chmod -R o+w /shadowsocksr
 
 #Execution environment
