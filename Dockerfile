@@ -1,6 +1,6 @@
 FROM alpine
 
-MAINTAINER letssudormrf
+LABEL maintainer="letssudormrf"
 
 #Download applications
 RUN set -ex \
@@ -14,5 +14,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 EXPOSE 8443
 
 WORKDIR /tmp
+
+VOLUME ["/tmp"]
 
 CMD ["entrypoint.sh"]
