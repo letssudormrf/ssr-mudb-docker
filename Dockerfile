@@ -11,7 +11,7 @@ RUN set -ex \
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 8443
+EXPOSE 8443/tcp 8443/udp
 
 WORKDIR /tmp
 
